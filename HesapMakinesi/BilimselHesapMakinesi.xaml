@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HesapMakinesi.BilimselHesapMakinesi"
+             Title="Bilimsel Hesap Makinesi"
+             BackgroundColor="#1e1e1e">
+
+    <!-- Main Grid Layout -->
+    <Grid RowDefinitions="Auto,Auto,*"  Margin="5" RowSpacing="5"
+          ColumnSpacing="5">
+
+        <!-- Result Display -->
+        <Grid Grid.Row="0" Padding="10">
+            <Label x:Name="resultText" 
+                   Text="0" 
+                   FontSize="40" 
+                   TextColor="White"
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!-- Mode Selection Row -->
+        <Grid Grid.Row="1" 
+              ColumnDefinitions="*,*" 
+              BackgroundColor="#333333">
+            <Button Text="DEG" 
+                    BackgroundColor="#333333" 
+                    TextColor="White" 
+                    x:Name="degButton"
+                    Clicked="OnAngleModeClicked" 
+                    Grid.Column="0" />
+            <Button Text="F-E" 
+                    BackgroundColor="#333333" 
+                    TextColor="White" 
+                    x:Name="scientificNotationButton"
+                    Clicked="OnScientificNotationClicked" 
+                    Grid.Column="1" />
+        </Grid>
+
+        <!-- Memory Buttons -->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="*,*,*,*,*,*" RowSpacing="5" ColumnSpacing="5"
+              BackgroundColor="#333333">
+            <Button Text="MC" BackgroundColor="#333333" TextColor="White" Grid.Column="0" Clicked="OnMemoryClicked" />
+            <Button Text="MR" BackgroundColor="#333333" TextColor="White" Grid.Column="1" Clicked="OnMemoryClicked" />
+            <Button Text="M+" BackgroundColor="#333333" TextColor="White" Grid.Column="2" Clicked="OnMemoryClicked" />
+            <Button Text="M-" BackgroundColor="#333333" TextColor="White" Grid.Column="3" Clicked="OnMemoryClicked" />
+            <Button Text="MS" BackgroundColor="#333333" TextColor="White" Grid.Column="4" Clicked="OnMemoryClicked" />
+            <Button Text="&#xE94B;" BackgroundColor="#333333" TextColor="White" FontFamily="Segoe MDL2 Assets" Grid.Column="5" Clicked="OnMemoryClicked" />
+        </Grid>
+
+        <!-- Function Expander and Calculator Buttons -->
+        <Grid Grid.Row="3">
+            <Grid RowDefinitions="Auto,*">
+          
+                <Grid Grid.Row="0" ColumnDefinitions="*,*" Padding="5" BackgroundColor="#333333">
+                    <Button x:Name="trigButton" 
+                            Text="Trigonometri" 
+                            Grid.Column="0" 
+                            Clicked="OnFunctionCategoryClicked"
+                            BackgroundColor="#333333" 
+                            TextColor="White" />
+                    <Button x:Name="functionButton" 
+                            Text="İşlev" 
+                            Grid.Column="1" 
+                            Clicked="OnFunctionCategoryClicked"
+                            BackgroundColor="#333333" 
+                            TextColor="White" />
+                </Grid>
+
+                <!-- Calculator Buttons -->
+                <Grid Grid.Row="1" 
+                      RowDefinitions="*,*,*,*,*,*,*" 
+                      ColumnDefinitions="*,*,*,*,*"
+                      RowSpacing="1" 
+                      ColumnSpacing="1">
+
+                    <!-- First Row -->
+                    <Button Text="2ⁿᵈ" Grid.Row="0" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnSecondFunctionClicked" />
+                    <Button Text="π" Grid.Row="0" Grid.Column="1" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnConstantClicked" />
+                    <Button Text="e" Grid.Row="0" Grid.Column="2" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnConstantClicked" />
+                    <Button Text="C" Grid.Row="0" Grid.Column="3" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnClearClicked" />
+                    <Button Text="⌫" Grid.Row="0" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnBackspaceClicked" />
+
+                    <!-- Second Row -->
+                    <Button Text="x²" Grid.Row="1" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="¹/ₓ" Grid.Row="1" Grid.Column="1" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="|x|" Grid.Row="1" Grid.Column="2" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="exp" Grid.Row="1" Grid.Column="3" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="mod" Grid.Row="1" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+
+                    <!-- Third Row -->
+                    <Button Text="√" Grid.Row="2" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="(" Grid.Row="2" Grid.Column="1" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnParenthesisClicked" />
+                    <Button Text=")" Grid.Row="2" Grid.Column="2" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnParenthesisClicked" />
+                    <Button Text="n!" Grid.Row="2" Grid.Column="3" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="÷" Grid.Row="2" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+
+                    <!-- Fourth Row -->
+                    <Button Text="xʸ" Grid.Row="3" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+                    <Button Text="7" Grid.Row="3" Grid.Column="1" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="8" Grid.Row="3" Grid.Column="2" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="9" Grid.Row="3" Grid.Column="3" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="×" Grid.Row="3" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+
+                    <!-- Fifth Row -->
+                    <Button Text="10ˣ" Grid.Row="4" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="4" Grid.Row="4" Grid.Column="1" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="5" Grid.Row="4" Grid.Column="2" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="6" Grid.Row="4" Grid.Column="3" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="-" Grid.Row="4" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+
+                    <!-- Sixth Row -->
+                    <Button Text="log" Grid.Row="5" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="1" Grid.Row="5" Grid.Column="1" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="2" Grid.Row="5" Grid.Column="2" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="3" Grid.Row="5" Grid.Column="3" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="+" Grid.Row="5" Grid.Column="4" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnOperatorClicked" />
+
+                    <!-- Seventh Row -->
+                    <Button Text="ln" Grid.Row="6" Grid.Column="0" BackgroundColor="#2a2a2a" TextColor="White" Clicked="OnScientificFunctionClicked" />
+                    <Button Text="+/-" Grid.Row="6" Grid.Column="1" BackgroundColor="#464646" TextColor="White" Clicked="OnNegateClicked" />
+                    <Button Text="0" Grid.Row="6" Grid.Column="2" BackgroundColor="#464646" TextColor="White" Clicked="OnNumberClicked" />
+                    <Button Text="," Grid.Row="6" Grid.Column="3" BackgroundColor="#464646" TextColor="White" Clicked="OnDecimalPointClicked" />
+                    <Button Text="=" Grid.Row="6" Grid.Column="4" BackgroundColor="#33b0ff" TextColor="White" Clicked="OnEqualsClicked" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
